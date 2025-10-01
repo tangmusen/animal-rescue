@@ -1,0 +1,61 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/forum/forum",
+    "pages/discover/discover",
+    "pages/map/map",
+    "pages/profile/profile",
+    "pages/my-profiles/my-profiles",
+    "pages/animal-detail/animal-detail",
+    "pages/create-profile/create-profile",
+    "pages/import-data/import-data",
+    "pages/growth-record/growth-record",
+    "pages/multi-recognize/multi-recognize"
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#4CAF50",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/forum/forum",
+        "text": "论坛",
+        "iconPath": "images/forum.png",
+        "selectedIconPath": "images/forum-active.png"
+      },
+      {
+        "pagePath": "pages/create-profile/create-profile",
+        "text": "发现",
+        "iconPath": "images/discover.png",
+        "selectedIconPath": "images/discover-active.png"
+      },
+      {
+        "pagePath": "pages/map/map",
+        "text": "地图",
+        "iconPath": "images/map.png",
+        "selectedIconPath": "images/map-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "images/my.png",
+        "selectedIconPath": "images/my-active.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于显示附近救助点位，并在发帖时标记位置信息"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getLocation"
+  ]
+}
+
