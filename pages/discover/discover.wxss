@@ -1,0 +1,18 @@
+.container {
+  padding: 100rpx 40rpx;
+  text-align: center;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 48rpx;
+  color: #333;
+  display: block;
+  margin-bottom: 30rpx;
+}
+
+.subtitle {
+  font-size: 32rpx;
+  color: #666;
+}

@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="filter-bar">
+    <view class="filter-group">
+      <text class="filter-label">类型:</text>
+      <view class="filter-options">
+        <view class="filter-option {{filterType === 'all' ? 'active' : ''}}" bindtap="filterByType" data-type="all">全部</view>
+        <view class="filter-option {{filterType === '猫' ? 'active' : ''}}" bindtap="filterByType" data-type="猫">猫</view>
+        <view class="filter-option {{filterType === '狗' ? 'active' : ''}}" bindtap="filterByType" data-type="狗">狗</view>
+      </view>
+    </view>
+    
+    <view class="view-toggle" bindtap="toggleView">
+      <text>{{showList ? '地图' : '列表'}}</text>
+    </view>
+  </view>
+  
+  <map wx:if="{{!showList}}" 
+       class="map" 
+       latitude="{{latitude}}" 
+       longitude="{{longitude}}" 
+       scale="{{scale}}" 
+       markers="{{markers}}" 
+       bindmarkertap="markerTap"
+       show-location>
+  </map>
+  
+  <scroll-view wx:else class="animal-list" scroll-y>
+    <view class="animal-item" wx:for="{{animals}}" wx:key="id">
+      <view class="animal-emoji">{{item.type === '猫' ? '🐱' : '🐶'}}</view>
+      <view class="animal-info">
+        <view class="animal-header">
+          <text class="animal-name">{{item.name}}</text>
+          <view class="health-badge {{item.health === '健康' ? 'health-healthy' : 'health-observe'}}">{{item.health}}</view>
+        </view>
+        <text class="animal-location">📍 {{item.location}} · 距离{{item.distance}}</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

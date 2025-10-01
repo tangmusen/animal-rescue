@@ -1,0 +1,109 @@
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- 用户信息卡片 -->
+  <view class="user-card">
+    <image class="user-avatar" src="/images/avatar.png" mode="aspectFill"></image>
+    <view class="user-info">
+      <text class="greeting">你好，爱心救助者</text>
+      <view class="user-stats">
+        <text class="stat-item">积分: {{userInfo.points || 2880}}</text>
+        <text class="stat-item">等级: {{userInfo.level || 'Lv.3'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- AI智能识别动物卡片 -->
+  <view class="ai-card" bindtap="goToRecognize">
+    <view class="ai-content">
+      <view class="ai-left">
+        <text class="ai-emoji">🤖</text>
+        <view class="ai-text">
+          <text class="ai-title">AI智能识别动物</text>
+          <text class="ai-desc">拍照识别，快速建档</text>
+        </view>
+      </view>
+      <text class="arrow-right">➜</text>
+    </view>
+  </view>
+
+  <!-- 快捷功能入口 -->
+  <view class="quick-features">
+    <view class="feature-item" bindtap="goToMyProfiles">
+      <view class="feature-icon-wrapper">
+        <text class="feature-emoji">🐕</text>
+      </view>
+      <text class="feature-name">我的档案</text>
+    </view>
+    <view class="feature-item" bindtap="goToDiscover">
+      <view class="feature-icon-wrapper">
+        <text class="feature-emoji">🔍</text>
+      </view>
+      <text class="feature-name">发现动物</text>
+    </view>
+    <view class="feature-item" bindtap="goToMap">
+      <view class="feature-icon-wrapper">
+        <text class="feature-emoji">🗺️</text>
+      </view>
+      <text class="feature-name">动物地图</text>
+    </view>
+    <view class="feature-item" bindtap="goToForum">
+      <view class="feature-icon-wrapper">
+        <text class="feature-emoji">💭</text>
+      </view>
+      <text class="feature-name">救助论坛</text>
+    </view>
+  </view>
+
+  <!-- 紧急救助卡片 -->
+  <view class="task-card">
+    <view class="card-header">
+      <view class="header-left">
+        <text class="lightning-emoji">⚡</text>
+        <text class="card-title">紧急救助</text>
+      </view>
+      <text class="view-all" bindtap="goToEmergency">查看全部</text>
+    </view>
+    <view class="task-content">
+      <view class="task-item">
+        <view class="task-left">
+          <text class="task-name">投喂小橘</text>
+          <text class="task-time">今天 18:00</text>
+        </view>
+        <view class="task-right">
+          <view class="progress-container">
+            <view class="progress-bar">
+              <view class="progress-fill" style="width: 75%"></view>
+            </view>
+            <text class="progress-text">75%</text>
+          </view>
+          <button class="complete-btn" bindtap="completeTask">完成</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最近档案卡片 -->
+  <view class="recent-card">
+    <view class="card-header">
+      <view class="header-left">
+        <text class="folder-emoji">📋</text>
+        <text class="card-title">最近档案</text>
+      </view>
+      <text class="view-all green-text">{{recentCount || 5}}个档案</text>
+    </view>
+    <view class="recent-content">
+      <view class="recent-item">
+        <view class="recent-info">
+          <text class="recent-title">查看所有动物档案</text>
+          <text class="recent-desc">管理和浏览已创建的档案信息</text>
+        </view>
+        <button class="enter-btn" bindtap="goToProfiles">进入 →</button>
+      </view>
+    </view>
+  </view>
+</view>
+goToRecognize() {
+  wx.switchTab({
+    url: '/pages/create-profile/create-profile'
+  });
+},

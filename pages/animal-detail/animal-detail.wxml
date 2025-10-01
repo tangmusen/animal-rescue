@@ -1,0 +1,209 @@
+<!--pages/animal-detail/animal-detail.wxml-->
+<view class="container" wx:if="{{!loading}}">
+  <!-- 动物照片 -->
+  <view class="photo-section" wx:if="{{animal.photos && animal.photos.length > 0}}">
+    <image 
+      class="animal-photo" 
+      src="{{animal.photos[0]}}" 
+      mode="aspectFill"
+      bindtap="previewImage"
+    />
+    <view class="photo-count" wx:if="{{animal.photos.length > 1}}">
+      +{{animal.photos.length - 1}}
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="section">
+    <view class="section-title">🐾 基本信息</view>
+    <view class="info-grid">
+      <view class="info-item">
+        <text class="info-label">编号</text>
+        <text class="info-value">{{animal.id}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">名称</text>
+        <text class="info-value">{{animal.name}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">种类</text>
+        <text class="info-value">{{animal.type}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">品种</text>
+        <text class="info-value">{{animal.breed}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">性别</text>
+        <text class="info-value">{{animal.gender}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">年龄</text>
+        <text class="info-value">{{animal.ageEstimate}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">体重</text>
+        <text class="info-value">{{animal.weight}}</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">毛色</text>
+        <text class="info-value">{{animal.furColor}}</text>
+      </view>
+    </view>
+    
+    <view class="feature-item" wx:if="{{animal.distinguishingFeatures}}">
+      <text class="info-label">特征标识</text>
+      <text class="info-value feature-text">{{animal.distinguishingFeatures}}</text>
+    </view>
+  </view>
+
+  <!-- 健康状况 -->
+  <view class="section">
+    <view class="section-title">🏥 健康状况</view>
+    <view class="health-grid">
+      <view class="health-item">
+        <text class="health-label">健康状态</text>
+        <view class="health-status status-{{animal.healthStatus}}">{{animal.healthStatus}}</view>
+      </view>
+      <view class="health-item">
+        <text class="health-label">是否绝育</text>
+        <text class="health-value">{{animal.isNeutered}}</text>
+      </view>
+      <view class="health-item">
+        <text class="health-label">疫苗情况</text>
+        <text class="health-value">{{animal.isVaccinated}}</text>
+      </view>
+    </view>
+    
+    <view class="medical-records" wx:if="{{animal.medicalRecords && animal.medicalRecords.length > 0}}">
+      <text class="records-title">体检记录：</text>
+      <view class="record-item" wx:for="{{animal.medicalRecords}}" wx:key="index">
+        <text class="record-text">• {{item}}</text>
+      </view>
+    </view>
+    
+    <view class="medical-history" wx:if="{{animal.medicalHistory}}">
+      <text class="records-title">病史记录：</text>
+      <text class="history-text">{{animal.medicalHistory}}</text>
+    </view>
+  </view>
+
+  <!-- 救助情况 -->
+  <view class="section">
+    <view class="section-title">🆘 救助情况</view>
+    <view class="rescue-info">
+      <view class="rescue-item">
+        <text class="rescue-label">救助日期</text>
+        <text class="rescue-value">{{animal.rescueDate}}</text>
+      </view>
+      <view class="rescue-item">
+        <text class="rescue-label">救助地点</text>
+        <text class="rescue-value">{{animal.rescueLocation}}</text>
+      </view>
+      <view class="rescue-item">
+        <text class="rescue-label">救助人</text>
+        <text class="rescue-value">{{animal.rescuer}}</text>
+      </view>
+    </view>
+    
+    <view class="rescue-reason" wx:if="{{animal.rescueReason}}">
+      <text class="records-title">救助原因：</text>
+      <text class="reason-text">{{animal.rescueReason}}</text>
+    </view>
+  </view>
+
+  <!-- 性格与习性 -->
+  <view class="section">
+    <view class="section-title">😺 性格与习性</view>
+    <view class="personality-info">
+      <view class="personality-item" wx:if="{{animal.personality}}">
+        <text class="personality-label">性格描述</text>
+        <text class="personality-value">{{animal.personality}}</text>
+      </view>
+      <view class="personality-item" wx:if="{{animal.suitableEnvironment}}">
+        <text class="personality-label">适应环境</text>
+        <text class="personality-value">{{animal.suitableEnvironment}}</text>
+      </view>
+      <view class="personality-item" wx:if="{{animal.habits}}">
+        <text class="personality-label">生活习惯</text>
+        <text class="personality-value">{{animal.habits}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 领养情况 -->
+  <view class="section">
+    <view class="section-title">🏠 领养情况</view>
+    <view class="adoption-info">
+      <view class="adoption-item">
+        <text class="adoption-label">是否可领养</text>
+        <view class="adoption-status status-{{animal.isAdoptable}}">{{animal.isAdoptable}}</view>
+      </view>
+      <view class="adoption-item">
+        <text class="adoption-label">当前状态</text>
+        <view class="current-status status-{{animal.currentStatus}}">{{animal.currentStatus}}</view>
+      </view>
+    </view>
+    
+    <view class="adoption-requirements" wx:if="{{animal.adoptionRequirements}}">
+      <text class="records-title">领养须知：</text>
+      <text class="requirements-text">{{animal.adoptionRequirements}}</text>
+    </view>
+    
+    <!-- 已领养信息 -->
+    <view class="adopted-info" wx:if="{{animal.currentStatus === '已被领养' && animal.adoptedPersonName}}">
+      <text class="records-title">领养人信息：</text>
+      <view class="adopted-details">
+        <text class="adopted-item">姓名：{{animal.adoptedPersonName}}</text>
+        <text class="adopted-item">城市：{{animal.adoptedPersonCity}}</text>
+        <text class="adopted-item">联系方式：{{animal.adoptedPersonContact}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 备注 -->
+  <view class="section" wx:if="{{animal.remarks}}">
+    <view class="section-title">📝 备注</view>
+    <text class="remarks-text">{{animal.remarks}}</text>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons" wx:if="{{animal}}">
+    <!-- 我的档案才显示编辑删除按钮 -->
+    <view wx:if="{{animal.isMyProfile}}" class="my-actions">
+      <button class="action-btn edit-btn" bindtap="editProfile">编辑档案</button>
+      <button class="action-btn delete-btn" bindtap="confirmDelete">删除档案</button>
+    </view>
+    
+    <!-- 系统档案显示其他操作 -->
+    <view wx:else class="system-actions">
+      <button class="action-btn contact-btn" bindtap="contactRescuer">联系救助人</button>
+      <button class="action-btn adopt-btn" bindtap="applyAdoption" wx:if="{{animal.isAdoptable === '是'}}">
+        申请领养
+      </button>
+    </view>
+  </view>
+</view>
+
+<!-- 加载状态 -->
+<view class="loading-container" wx:if="{{loading}}">
+  <view class="loading-spinner"></view>
+  <text class="loading-text">加载中...</text>
+</view>
+
+<!-- 删除确认模态框 -->
+<view class="modal-overlay" wx:if="{{showDeleteModal}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">确认删除</text>
+    </view>
+    <view class="modal-body">
+      <text class="modal-text">确定要删除档案"{{animal.name}}"吗？</text>
+      <text class="modal-warning">此操作不可恢复</text>
+    </view>
+    <view class="modal-actions">
+      <button class="modal-btn cancel-btn" bindtap="cancelDelete">取消</button>
+      <button class="modal-btn confirm-btn" bindtap="deleteProfile">确认删除</button>
+    </view>
+  </view>
+</view>

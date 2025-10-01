@@ -1,0 +1,82 @@
+<!-- pages/profile/profile.wxml -->
+<view class="page-container">
+  <!-- 用户信息部分 -->
+  <view class="user-section">
+    <view class="user-main">
+      <image class="user-avatar" src="/images/avatar.png"></image>
+      <view class="user-info">
+        <view class="user-name">{{userInfo.nickname}}</view>
+        <view class="user-level">Lv.{{userInfo.level}} {{userInfo.levelText}}</view>
+      </view>
+    </view>
+    <view class="user-stats">
+      <view class="stat">
+        <view class="stat-num">{{userInfo.points}}</view>
+        <view class="stat-text">积分</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{userInfo.profilesCount}}</view>
+        <view class="stat-text">档案</view>
+      </view>
+      <view class="stat">
+        <view class="stat-num">{{userInfo.tasksCompleted}}</view>
+        <view class="stat-text">完成任务</view>
+      </view>
+    </view>
+    <view class="view-activity">查看我的收展 🔍</view>
+  </view>
+
+  <!-- 勋章展示 - 使用内联样式确保正确显示 -->
+  <view class="badge-section">
+    <view class="badge-title">我的勋章</view>
+    <view class="badge-list">
+      <block wx:for="{{badges}}" wx:key="id">
+        <view class="badge">
+          <view style="width: 60rpx; height: 60rpx; background: {{item.active ? 'linear-gradient(135deg, #4CAF50, #45a049)' : '#ffffff'}}; border: {{item.active ? 'none' : '2rpx solid #e0e0e0'}}; border-radius: 30rpx; display: flex; align-items: center; justify-content: center; margin-bottom: 8rpx; box-shadow: {{item.active ? '0 4rpx 8rpx rgba(76, 175, 80, 0.3)' : 'none'}};">
+            <text style="font-size: 28rpx;">{{item.icon}}</text>
+          </view>
+          <view class="badge-text">{{item.name}}</view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="menu-row" bindtap="goToMyProfiles">
+      <view class="menu-content">
+        <text class="menu-emoji">📋</text>
+        <text class="menu-name">我的档案</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-row" bindtap="goToMyTasks">
+      <view class="menu-content">
+        <text class="menu-emoji">📝</text>
+        <text class="menu-name">我的任务</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-row" bindtap="goToShop">
+      <view class="menu-content">
+        <text class="menu-emoji">🎁</text>
+        <text class="menu-name">积分商城</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-row" bindtap="goToStatistics">
+      <view class="menu-content">
+        <text class="menu-emoji">📊</text>
+        <text class="menu-name">数据统计</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-row" bindtap="goToSettings">
+      <view class="menu-content">
+        <text class="menu-emoji">⚙️</text>
+        <text class="menu-name">设置</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+</view>

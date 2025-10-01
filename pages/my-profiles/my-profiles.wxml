@@ -1,0 +1,105 @@
+<!--pages/my-profiles/my-profiles.wxml-->
+<view class="container">
+  <!-- 头部统计 -->
+  <view class="header-stats">
+    <view class="stat-item">
+      <text class="stat-number">{{totalProfiles}}</text>
+      <text class="stat-label">我的档案</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{waitingProfiles}}</text>
+      <text class="stat-label">等待领养</text>
+    </view>
+    <view class="stat-item">
+      <text class="stat-number">{{adoptedProfiles}}</text>
+      <text class="stat-label">已被领养</text>
+    </view>
+  </view>
+
+  <!-- 创建新档案按钮 -->
+  <view class="create-button" bindtap="createNewProfile">
+    <view class="create-icon">+</view>
+    <text class="create-text">创建新档案</text>
+  </view>
+
+  <!-- 档案列表 -->
+  <view class="profiles-section" wx:if="{{!loading && myProfiles.length > 0}}">
+    <view class="section-title">我的档案列表</view>
+    <view class="profile-list">
+      <view class="profile-card" wx:for="{{myProfiles}}" wx:key="id" data-id="{{item.id}}" bindtap="viewProfile">
+        <!-- 档案照片 -->
+        <view class="profile-image">
+          <image src="{{item.photos[0] || '/images/default-animal.jpg'}}" mode="aspectFill" class="animal-photo" />
+          <view class="status-badge status-{{item.currentStatus}}">{{item.currentStatus}}</view>
+        </view>
+        
+        <!-- 档案信息 -->
+        <view class="profile-info">
+          <view class="profile-header">
+            <text class="profile-name">{{item.name}}</text>
+            <text class="profile-id">{{item.id}}</text>
+          </view>
+          
+          <view class="profile-details">
+            <view class="detail-row">
+              <text class="detail-label">种类：</text>
+              <text class="detail-value">{{item.type}} · {{item.breed}}</text>
+            </view>
+            <view class="detail-row">
+              <text class="detail-label">性别：</text>
+              <text class="detail-value">{{item.gender}} · {{item.ageEstimate}}</text>
+            </view>
+            <view class="detail-row">
+              <text class="detail-label">救助日期：</text>
+              <text class="detail-value">{{item.rescueDate}}</text>
+            </view>
+            <view class="detail-row">
+              <text class="detail-label">健康状况：</text>
+              <text class="detail-value health-{{item.healthStatus}}">{{item.healthStatus}}</text>
+            </view>
+          </view>
+          
+          <view class="profile-actions">
+            <button class="action-btn edit-btn" data-id="{{item.id}}" bindtap="editProfile" catchtap="editProfile">
+              编辑
+            </button>
+            <button class="action-btn delete-btn" data-id="{{item.id}}" data-name="{{item.name}}" bindtap="confirmDelete" catchtap="confirmDelete">
+              删除
+            </button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && myProfiles.length === 0}}">
+    <view class="empty-icon">📋</view>
+    <text class="empty-title">还没有档案</text>
+    <text class="empty-subtitle">创建你的第一个动物档案吧</text>
+    <button class="empty-btn" bindtap="createNewProfile">立即创建</button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>
+
+<!-- 删除确认模态框 -->
+<view class="modal-overlay" wx:if="{{showDeleteModal}}">
+  <view class="modal-content">
+    <view class="modal-header">
+      <text class="modal-title">确认删除</text>
+    </view>
+    <view class="modal-body">
+      <text class="modal-text">确定要删除档案"{{deleteProfileName}}"吗？</text>
+      <text class="modal-warning">此操作不可恢复</text>
+    </view>
+    <view class="modal-actions">
+      <button class="modal-btn cancel-btn" bindtap="cancelDelete">取消</button>
+      <button class="modal-btn confirm-btn" bindtap="confirmDeleteProfile">确认删除</button>
+    </view>
+  </view>
+</view>

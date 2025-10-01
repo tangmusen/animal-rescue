@@ -1,0 +1,108 @@
+<!-- pages/create-profile/create-profile.wxml -->
+<view class="container">
+  <!-- 页面标题卡片 -->
+  <view class="title-card">
+    <text class="page-title">创建动物档案</text>
+    <text class="page-desc">为需要救助的动物建立档案</text>
+  </view>
+
+  <!-- 动物类型选择 -->
+  <view class="type-section">
+    <text class="section-title">选择动物类型</text>
+    <view class="type-options">
+      <view 
+        class="type-item {{animalType === 'cat' ? 'active' : ''}}" 
+        bindtap="selectAnimalType" 
+        data-type="cat"
+      >
+        <text class="type-emoji">🐱</text>
+        <text class="type-label">猫</text>
+      </view>
+      <view 
+        class="type-item {{animalType === 'dog' ? 'active' : ''}}" 
+        bindtap="selectAnimalType" 
+        data-type="dog"
+      >
+        <text class="type-emoji">🐕</text>
+        <text class="type-label">狗</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">名字（选填）</text>
+      <input 
+        class="form-input" 
+        placeholder="给它起个名字吧" 
+        value="{{name}}"
+        bindinput="inputName"
+        maxlength="20"
+      />
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">位置（必填）</text>
+      <view class="location-input">
+        <input 
+          class="form-input" 
+          placeholder="例如：XX小区3号楼附近" 
+          value="{{location}}"
+          bindinput="inputLocation"
+        />
+        <button class="location-btn" bindtap="getLocation">
+          <text class="btn-icon">📍</text>
+          <text>定位</text>
+        </button>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="form-label">描述（必填）</text>
+      <textarea 
+        class="form-textarea" 
+        placeholder="描述动物的特征、健康状况等" 
+        value="{{description}}"
+        bindinput="inputDescription"
+        maxlength="500"
+        auto-height
+      />
+    </view>
+  </view>
+
+  <!-- 紧急标记 -->
+  <view class="emergency-section" bindtap="toggleEmergency">
+    <view class="emergency-left">
+      <text class="emergency-icon">⚡</text>
+      <text class="emergency-text">紧急救助</text>
+      <text class="emergency-desc">需要立即处理</text>
+    </view>
+    <view class="switch {{isEmergency ? 'active' : ''}}">
+      <view class="switch-handle"></view>
+    </view>
+  </view>
+
+  <!-- 图片上传 -->
+  <view class="image-section">
+    <text class="section-title">添加图片（最多9张）</text>
+    <view class="image-grid">
+      <block wx:for="{{images}}" wx:key="index">
+        <view class="image-item">
+          <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"></image>
+          <text class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</text>
+        </view>
+      </block>
+      <view class="add-image" wx:if="{{images.length < 9}}" bindtap="chooseImage">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 提交按钮 -->
+  <button class="submit-btn" bindtap="submitProfile">
+    <text class="btn-icon">💾</text>
+    <text>创建档案</text>
+  </button>
+</view>

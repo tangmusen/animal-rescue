@@ -1,0 +1,360 @@
+/* pages/create-profile/create-profile.wxss */
+.container {
+  padding: 20rpx;
+  background: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 100rpx;
+}
+
+/* 标题卡片 */
+.title-card {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  padding: 40rpx 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 5rpx 20rpx rgba(76, 175, 80, 0.3);
+}
+
+.page-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10rpx;
+}
+
+.page-desc {
+  display: block;
+  font-size: 28rpx;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 动物类型选择 */
+.type-section {
+  background: #ffffff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  display: block;
+  font-size: 30rpx;
+  color: #333333;
+  font-weight: 500;
+  margin-bottom: 20rpx;
+}
+
+.type-options {
+  display: flex;
+  gap: 20rpx;
+}
+
+.type-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx;
+  background: #f5f5f5;
+  border-radius: 15rpx;
+  border: 3rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.type-item.active {
+  background: #e8f5e9;
+  border-color: #4CAF50;
+  transform: scale(1.02);
+  box-shadow: 0 4rpx 15rpx rgba(76, 175, 80, 0.2);
+}
+
+.type-emoji {
+  font-size: 60rpx;
+  margin-bottom: 10rpx;
+}
+
+.type-label {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.type-item.active .type-label {
+  color: #4CAF50;
+  font-weight: 500;
+}
+
+/* 表单部分 */
+.form-section {
+  background: #ffffff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666666;
+  margin-bottom: 15rpx;
+  font-weight: 500;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 20rpx;
+  background: #f8f8f8;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.form-input:focus {
+  background: #ffffff;
+  border-color: #4CAF50;
+}
+
+.location-input {
+  display: flex;
+  gap: 20rpx;
+}
+
+.location-input .form-input {
+  flex: 1;
+}
+
+.location-btn {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 0 30rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: #ffffff;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  border: none;
+  box-shadow: 0 4rpx 10rpx rgba(76, 175, 80, 0.3);
+}
+
+.location-btn::after {
+  border: none;
+}
+
+.location-btn:active {
+  transform: scale(0.98);
+}
+
+.btn-icon {
+  font-size: 32rpx;
+}
+
+.form-textarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: 20rpx;
+  background: #f8f8f8;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+  border: 2rpx solid transparent;
+  transition: all 0.3s;
+}
+
+.form-textarea:focus {
+  background: #ffffff;
+  border-color: #4CAF50;
+}
+
+/* 紧急标记 */
+.emergency-section {
+  background: #ffffff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.emergency-section:active {
+  transform: scale(0.99);
+}
+
+.emergency-left {
+  display: flex;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.emergency-icon {
+  font-size: 36rpx;
+}
+
+.emergency-text {
+  font-size: 30rpx;
+  color: #333333;
+  font-weight: 500;
+}
+
+.emergency-desc {
+  font-size: 26rpx;
+  color: #999999;
+}
+
+.switch {
+  width: 100rpx;
+  height: 50rpx;
+  background: #e0e0e0;
+  border-radius: 25rpx;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.switch.active {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  box-shadow: 0 2rpx 10rpx rgba(76, 175, 80, 0.3);
+}
+
+.switch-handle {
+  width: 42rpx;
+  height: 42rpx;
+  background: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+  transition: all 0.3s;
+  box-shadow: 0 2rpx 6rpx rgba(0, 0, 0, 0.2);
+}
+
+.switch.active .switch-handle {
+  transform: translateX(50rpx);
+}
+
+/* 图片上传 */
+.image-section {
+  background: #ffffff;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.image-item {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  background: #f5f5f5;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.image-item image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50rpx;
+  height: 50rpx;
+  background: rgba(255, 0, 0, 0.8);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  border-bottom-left-radius: 10rpx;
+  line-height: 1;
+}
+
+.add-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background: #f8f8f8;
+  border: 3rpx dashed #d0d0d0;
+  border-radius: 10rpx;
+  transition: all 0.3s;
+}
+
+.add-image:active {
+  background: #f0f0f0;
+  border-color: #4CAF50;
+  transform: scale(0.98);
+}
+
+.add-icon {
+  font-size: 60rpx;
+  color: #999999;
+  line-height: 1;
+}
+
+.add-text {
+  font-size: 24rpx;
+  color: #999999;
+  margin-top: 10rpx;
+}
+
+/* 提交按钮 */
+.submit-btn {
+  width: 100%;
+  height: 100rpx;
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: #ffffff;
+  font-size: 34rpx;
+  font-weight: 500;
+  border-radius: 50rpx;
+  border: none;
+  box-shadow: 0 5rpx 20rpx rgba(76, 175, 80, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15rpx;
+  position: fixed;
+  bottom: 30rpx;
+  left: 20rpx;
+  right: 20rpx;
+}
+
+.submit-btn::after {
+  border: none;
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 3rpx 15rpx rgba(76, 175, 80, 0.3);
+}

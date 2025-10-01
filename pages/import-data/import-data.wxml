@@ -1,0 +1,190 @@
+<!--pages/import-data/import-data.wxml-->
+<view class="container">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <view class="header-icon">🐱</view>
+    <text class="header-title">海和院小区猫咪档案导入</text>
+    <text class="header-subtitle">32只流浪猫完整档案数据导入系统</text>
+  </view>
+
+  <!-- 导入状态卡片 -->
+  <view class="status-card" wx:if="{{!importResult}}">
+    <view class="status-header">
+      <text class="status-title">📊 导入配置信息</text>
+    </view>
+    
+    <view class="status-content" wx:if="{{!importing}}">
+      <view class="status-item">
+        <text class="status-label">环境ID：</text>
+        <text class="status-value">cloud1-9gkwqyphff2c9bfa</text>
+      </view>
+      <view class="status-item">
+        <text class="status-label">数据源：</text>
+        <text class="status-value">海和院小区流浪猫登记表</text>
+      </view>
+      <view class="status-item">
+        <text class="status-label">猫咪数量：</text>
+        <text class="status-value">32只完整档案</text>
+      </view>
+      <view class="status-item">
+        <text class="status-label">集合名称：</text>
+        <text class="status-value">cat_profiles</text>
+      </view>
+      <view class="status-item">
+        <text class="status-label">总支出：</text>
+        <text class="status-value">8965元</text>
+      </view>
+    </view>
+
+    <!-- 导入进度 -->
+    <view class="progress-section" wx:if="{{importing}}">
+      <view class="progress-info">
+        <text class="progress-text">{{currentStep}}</text>
+        <text class="progress-percent">{{progress}}%</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progress}}%"></view>
+      </view>
+      <view class="progress-steps">
+        <view class="step-item {{progress >= 10 ? 'completed' : ''}}">
+          <view class="step-dot"></view>
+          <text class="step-text">读取数据</text>
+        </view>
+        <view class="step-item {{progress >= 30 ? 'completed' : ''}}">
+          <view class="step-dot"></view>
+          <text class="step-text">处理格式</text>
+        </view>
+        <view class="step-item {{progress >= 60 ? 'completed' : ''}}">
+          <view class="step-dot"></view>
+          <text class="step-text">上传云端</text>
+        </view>
+        <view class="step-item {{progress >= 95 ? 'completed' : ''}}">
+          <view class="step-dot"></view>
+          <text class="step-text">导入完成</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 导入结果 -->
+  <view class="result-card" wx:if="{{importResult}}">
+    <view class="result-header {{importResult.success ? 'success' : 'error'}}">
+      <text class="result-icon">{{importResult.success ? '✅' : '❌'}}</text>
+      <text class="result-title">{{importResult.success ? '导入成功' : '导入失败'}}</text>
+    </view>
+    <view class="result-content">
+      <text class="result-message">{{importResult.message}}</text>
+    </view>
+  </view>
+
+  <!-- 猫咪信息预览 -->
+  <view class="preview-card">
+    <view class="preview-header">
+      <text class="preview-title">🐾 猫咪档案预览</text>
+    </view>
+    <view class="preview-content">
+      <view class="cat-grid">
+        <view class="cat-preview-item">
+          <text class="cat-name">橘橘宝</text>
+          <text class="cat-details">HHY001 · 长毛橘白 · 已绝育</text>
+        </view>
+        <view class="cat-preview-item">
+          <text class="cat-name">狸狸Lily</text>
+          <text class="cat-details">HHY002 · 短毛狸花 · 未知</text>
+        </view>
+        <view class="cat-preview-item">
+          <text class="cat-name">花花</text>
+          <text class="cat-details">HHY003 · 短毛三花 · 已绝育</text>
+        </view>
+        <view class="cat-preview-item">
+          <text class="cat-name">缘缘</text>
+          <text class="cat-details">HHY017 · 品种猫 · 已被领养</text>
+        </view>
+        <view class="cat-preview-item">
+          <text class="cat-name">灰灰</text>
+          <text class="cat-details">HHY028 · 缅因猫 · 已被领养</text>
+        </view>
+        <view class="cat-preview-item">
+          <text class="cat-name">...</text>
+          <text class="cat-details">更多27只猫咪</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 数据结构说明 -->
+  <view class="schema-card">
+    <view class="schema-header">
+      <text class="schema-title">📋 数据结构说明</text>
+    </view>
+    <view class="schema-content">
+      <view class="schema-section">
+        <text class="section-title">基本信息</text>
+        <view class="field-list">
+          <text class="field-item">• 序号 (HHY001-HHY032)</text>
+          <text class="field-item">• 名字 (橘橘宝、狸狸Lily等)</text>
+          <text class="field-item">• 颜色品种 (长毛橘白、短毛三花等)</text>
+          <text class="field-item">• 性别与绝育状态</text>
+        </view>
+      </view>
+      
+      <view class="schema-section">
+        <text class="section-title">健康与医疗</text>
+        <view class="field-list">
+          <text class="field-item">• 驱虫疫苗记录</text>
+          <text class="field-item">• 绝育手术记录</text>
+          <text class="field-item">• 体重与健康状况</text>
+          <text class="field-item">• 医疗支出统计</text>
+        </view>
+      </view>
+      
+      <view class="schema-section">
+        <text class="section-title">状态管理</text>
+        <view class="field-list">
+          <text class="field-item">• 在小区 (20只)</text>
+          <text class="field-item">• 被领养 (3只)</text>
+          <text class="field-item">• 寄养中 (2只)</text>
+          <text class="field-item">• 失踪/去喵星 (7只)</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons">
+    <button 
+      class="action-btn import-btn {{importing ? 'disabled' : ''}}" 
+      bindtap="startImport"
+      disabled="{{importing}}"
+    >
+      {{importing ? '导入中...' : '🚀 开始导入32只猫咪数据'}}
+    </button>
+    
+    <view class="button-row" wx:if="{{importResult && importResult.success}}">
+      <button class="action-btn view-btn" bindtap="viewImportedData">
+        📖 查看导入数据
+      </button>
+      <button class="action-btn stats-btn" bindtap="getDbStats">
+        📊 数据库统计
+      </button>
+    </view>
+    
+    <button class="action-btn clear-btn" bindtap="clearDatabase">
+      🗑️ 清空数据库
+    </button>
+  </view>
+
+  <!-- 使用说明 -->
+  <view class="help-card">
+    <view class="help-header">
+      <text class="help-title">💡 使用说明</text>
+    </view>
+    <view class="help-content">
+      <text class="help-item">1. 点击"开始导入"按钮，系统将导入32只猫咪的完整档案</text>
+      <text class="help-item">2. 数据包含序号、名称、颜色品种、绝育状态、位置、医疗记录等</text>
+      <text class="help-item">3. 支持重复导入，相同序号的记录会被更新而不是重复添加</text>
+      <text class="help-item">4. 导入后可通过"查看数据"和"统计"按钮查看结果</text>
+      <text class="help-item">5. GPS坐标和照片字段为空，需要后续手动补充</text>
+    </view>
+  </view>
+</view>

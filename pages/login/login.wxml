@@ -1,0 +1,125 @@
+<!-- pages/login/login.wxml -->
+<view class="container">
+  <!-- 顶部装饰 -->
+  <view class="header-decoration">
+    <view class="circle circle-1"></view>
+    <view class="circle circle-2"></view>
+    <view class="circle circle-3"></view>
+  </view>
+
+  <!-- Logo 和标题 -->
+  <view class="logo-section">
+    <view class="logo">
+      <text class="logo-emoji">🐾</text>
+    </view>
+    <text class="app-name">护生小程序</text>
+    <text class="app-desc">守护每一个生命</text>
+  </view>
+
+  <!-- 未登录状态 -->
+  <view class="login-section" wx:if="{{!hasUserInfo}}">
+    
+    <!-- 微信授权登录 -->
+    <view class="login-card">
+      <text class="card-title">微信快捷登录</text>
+      <text class="card-desc">一键获取微信头像和昵称</text>
+      
+      <!-- 新版本：getUserProfile -->
+      <button 
+        wx:if="{{canIUseGetUserProfile}}" 
+        class="login-btn wechat-btn"
+        bindtap="getUserProfile"
+      >
+        <text class="btn-icon">💚</text>
+        <text>微信授权登录</text>
+      </button>
+      
+      <!-- 旧版本：getUserInfo -->
+      <button 
+        wx:else
+        class="login-btn wechat-btn"
+        open-type="getUserInfo"
+        bindgetuserinfo="getUserInfo"
+      >
+        <text class="btn-icon">💚</text>
+        <text>微信授权登录</text>
+      </button>
+    </view>
+
+    <!-- 分割线 -->
+    <view class="divider">
+      <view class="divider-line"></view>
+      <text class="divider-text">或</text>
+      <view class="divider-line"></view>
+    </view>
+
+    <!-- 手动输入登录 -->
+    <view class="login-card">
+      <text class="card-title">手动设置信息</text>
+      
+      <!-- 头像选择 -->
+      <view class="avatar-section">
+        <button class="avatar-wrapper" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+          <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+          <view class="avatar-edit">
+            <text>更换</text>
+          </view>
+        </button>
+      </view>
+      
+      <!-- 昵称输入 -->
+      <view class="input-group">
+        <input 
+          class="nickname-input"
+          type="nickname"
+          placeholder="请输入昵称"
+          value="{{userInfo.nickName}}"
+          bindinput="onNicknameInput"
+          maxlength="20"
+        />
+      </view>
+      
+      <button class="login-btn manual-btn" bindtap="manualLogin">
+        <text class="btn-icon">✍️</text>
+        <text>确认登录</text>
+      </button>
+    </view>
+
+    <!-- 快速测试登录（开发时使用） -->
+    <view class="test-login">
+      <button class="test-btn" bindtap="quickTestLogin">
+        <text class="test-icon">🚀</text>
+        <text>快速测试登录</text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 已登录状态 -->
+  <view class="user-section" wx:else>
+    <view class="user-card">
+      <image class="user-avatar" src="{{userInfo.avatarUrl}}" mode="aspectFill"></image>
+      <text class="user-name">{{userInfo.nickName}}</text>
+      <text class="user-id">ID: {{userInfo.userId}}</text>
+      
+      <view class="login-success">
+        <text class="success-icon">✅</text>
+        <text class="success-text">已登录</text>
+      </view>
+      
+      <view class="action-buttons">
+        <button class="action-btn" bindtap="goBack">
+          <text>返回</text>
+        </button>
+        <button class="action-btn logout-btn" bindtap="logout">
+          <text>退出登录</text>
+        </button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部说明 -->
+  <view class="footer">
+    <text class="footer-text">登录后即可发布救助信息</text>
+    <text class="footer-text">您的信息仅用于身份标识</text>
+  </view>
+</view> 

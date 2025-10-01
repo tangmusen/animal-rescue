@@ -1,0 +1,101 @@
+<!-- pages/forum/forum.wxml -->
+<view class="container">
+  <!-- 发布论坛栏 -->
+  <view class="publish-card" bindtap="goToPublish">
+    <view class="publish-content">
+      <view class="publish-left">
+        <text class="publish-emoji">✍️</text>
+        <view class="publish-text">
+          <text class="publish-title">救助论坛</text>
+          <text class="publish-desc">发布</text>
+        </view>
+      </view>
+      <text class="arrow-right">➜</text>
+    </view>
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="category-tabs">
+    <view class="tab-item {{currentTab === 'all' ? 'active' : ''}}" bindtap="switchTab" data-tab="all">
+      <text class="tab-emoji">🌐</text>
+      <text>所有论坛</text>
+    </view>
+    <view class="tab-item {{currentTab === 'nearby' ? 'active' : ''}}" bindtap="switchTab" data-tab="nearby">
+      <text class="tab-emoji">📍</text>
+      <text>附近论坛</text>
+    </view>
+    <view class="tab-item {{currentTab === 'community' ? 'active' : ''}}" bindtap="switchTab" data-tab="community">
+      <text class="tab-emoji">🏘️</text>
+      <text>小区论坛</text>
+    </view>
+  </view>
+
+  <!-- 论坛列表 -->
+  <scroll-view class="forum-list" scroll-y>
+    <block wx:for="{{posts}}" wx:key="id">
+      <view class="forum-card">
+        <!-- 发帖人信息 -->
+        <view class="poster-info">
+          <image class="poster-avatar" src="{{item.authorAvatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+          <view class="poster-details">
+            <text class="poster-name">{{item.author || '匿名用户'}}</text>
+            <view class="post-meta">
+              <text class="post-time">{{item.createTime || '刚刚'}}</text>
+              <text class="post-location" wx:if="{{item.distance}}">· {{item.distance}}</text>
+            </view>
+          </view>
+          <!-- 帖子标签 -->
+          <view class="post-tag" wx:if="{{item.postType === 'rescue'}}">
+            <text class="tag-emoji">🆘</text>
+            <text>救助</text>
+          </view>
+          <view class="post-tag emergency" wx:elif="{{item.isEmergency}}">
+            <text class="tag-emoji">⚡</text>
+            <text>紧急</text>
+          </view>
+        </view>
+
+        <!-- 帖子内容 -->
+        <view class="post-content">
+          <text class="post-title">{{item.title || '无标题'}}</text>
+          <text class="post-text">{{item.content || ''}}</text>
+          
+          <!-- 图片 -->
+          <view class="post-images" wx:if="{{item.images && item.images.length > 0}}">
+            <block wx:for="{{item.images}}" wx:for-item="img" wx:for-index="imgIndex" wx:key="imgIndex">
+              <image class="post-image" src="{{img}}" mode="aspectFill" bindtap="previewImage" data-url="{{img}}" data-urls="{{item.images}}"></image>
+            </block>
+          </view>
+        </view>
+
+        <!-- 互动栏 -->
+        <view class="post-actions">
+          <view class="action-item" bindtap="likePost" data-id="{{item.id}}">
+            <text class="action-icon {{item.isLiked ? 'liked' : ''}}">{{item.isLiked ? '❤️' : '🤍'}}</text>
+            <text class="action-text">{{item.likes || 0}}</text>
+          </view>
+          <view class="action-item" bindtap="viewPost" data-id="{{item.id}}">
+            <text class="action-icon">💬</text>
+            <text class="action-text">{{item.comments || 0}}</text>
+          </view>
+          <view class="action-item" bindtap="sharePost" data-id="{{item.id}}">
+            <text class="action-icon">📤</text>
+            <text class="action-text">分享</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 加载状态 -->
+    <view class="load-more" wx:if="{{loading}}">
+      <text>加载中...</text>
+    </view>
+    
+    <!-- 空状态 -->
+    <view class="empty" wx:if="{{posts.length === 0 && !loading}}">
+      <text class="empty-emoji">📭</text>
+      <text class="empty-text">暂无论坛内容</text>
+      <text class="empty-desc">快来发布第一条救助信息吧</text>
+    </view>
+  </scroll-view>
+</view>
